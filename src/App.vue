@@ -1,15 +1,33 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app">
+    <crypto-price @data-updated="updateChartData" />
+    <crypto-chart :euroData="euroDataList" :usdData="usdDataList" />
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import CryptoPrice from './components/CryptoPrice.vue';
+import CryptoChart from './components/CryptoChart.vue';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    CryptoPrice,
+    CryptoChart,
+  },
+  data() {
+    return {
+      euroDataList: [],
+      usdDataList: [],
+
+    };
+  },
+  methods: {
+    updateChartData(euroData, usdData) {
+      this.euroDataList = euroData;
+      this.usdDataList = usdData;
+    }
+
   }
 }
 </script>
